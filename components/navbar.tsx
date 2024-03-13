@@ -1,8 +1,5 @@
 import Link from "next/link";
 import Container from "./ui/container";
-import MainNav from "./main-nav";
-import getCategories from "@/actions/get-categories";
-import NavbarActions from "./navbar-actions";
 import { UserButton, auth } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { User } from "lucide-react";
