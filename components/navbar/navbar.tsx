@@ -9,7 +9,6 @@ import NavActions from "./nav-actions";
 
 export const revalidate = 0;
 const Navbar = async () => {
-  const Auth = auth();
   return (
     <div className="bg-white border-b">
       <Container>
