@@ -30,6 +30,7 @@ model Pet {
   birthday  DateTime?
   owner     UserPet[]
   images    Image[]
+  description String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -51,10 +52,24 @@ model UserPet {
   userId    Int
   pet       Pet      @relation(fields: [petId], references: [id])
   petId     Int
-  role      String
+  role     UserPetRole @relation(fields: [roleId], references: [id])
+  roleId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([petId])
+  @@index([roleId])
+}
+
+model UserPetRole {
+  id       Int      @id @default(autoincrement())
+  userPet  UserPet[]
+  userPetId Int
+  role      String
+  roleLevel Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userPetId])
 }
