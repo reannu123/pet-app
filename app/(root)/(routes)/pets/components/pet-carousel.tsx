@@ -12,6 +12,8 @@ import {
 
 import { Image as ImageType, Pet as PetType } from "@prisma/client";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 interface PetsDashboardProps {
   pets: Pet[];
@@ -21,6 +23,7 @@ type Pet = PetType & {
 };
 
 export function PetCarousel({ pets }: PetsDashboardProps) {
+  const router = useRouter();
   return (
     <Carousel className="w-full max-w-6xl">
       <CarouselContent>
@@ -40,8 +43,18 @@ export function PetCarousel({ pets }: PetsDashboardProps) {
                       alt={pet.name}
                       className="aspect-square object-cover rounded-md"
                     />
-                    <h1 className="text-2xl">{pet.name}</h1>
-                    <p className="text-sm">{pet.description}</p>
+                    <div className="flex justify-between pt-4">
+                      <div>
+                        <h1 className="text-2xl">{pet.name}</h1>
+                        <p className="text-sm">{pet.description}</p>
+                      </div>
+                      <Button
+                        variant={"outline"}
+                        onClick={() => router.push(`/pets/${pet.id}`)}
+                      >
+                        Edit
+                      </Button>
+                    </div>
                   </span>
                 </CardContent>
               </Card>
