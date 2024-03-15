@@ -4,6 +4,7 @@ import { PetCarousel } from "./pet-carousel";
 import { Image as ImageType, Pet as PetType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/heading";
+import { Plus } from "lucide-react";
 interface PetsDashboardProps {
   pets: Pet[];
 }
@@ -19,6 +20,14 @@ export default function PetsDashboard({ pets }: PetsDashboardProps) {
           title="Pet Dashboard"
           description="Manage your pets"
         />
+        <Button
+          className="w-12 h-12 rounded-xl"
+          onClick={() => {
+            router.push("/pets/new");
+          }}
+        >
+          <Plus />
+        </Button>
       </div>
 
       <div className="flex items-center justify-center">
@@ -30,15 +39,6 @@ export default function PetsDashboard({ pets }: PetsDashboardProps) {
           <div>No pets found</div>
         )}
       </div>
-
-      <Button
-        variant={"outline"}
-        onClick={() => {
-          router.push("/pets/new");
-        }}
-      >
-        Add Pet
-      </Button>
     </div>
   );
 }

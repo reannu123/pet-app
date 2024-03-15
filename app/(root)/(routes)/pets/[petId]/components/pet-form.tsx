@@ -67,7 +67,7 @@ export default function PetForm({ initialData }: PetFormProps) {
     console.log(values);
     try {
       if (initialData) {
-        // Update the product
+        await axios.patch(`/api/pets/${params.petId}`, values);
       } else {
         await axios.post("/api/pets", values);
       }
