@@ -5,6 +5,13 @@ import { Image as ImageType, Pet as PetType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Heading } from "@/components/heading";
 import { Plus } from "lucide-react";
+import {
+  TooltipContent,
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TooltipWrapper } from "@/components/tooltips/tooltip-wrapper";
 interface PetsDashboardProps {
   pets: Pet[];
 }
@@ -20,14 +27,20 @@ export default function PetsDashboard({ pets }: PetsDashboardProps) {
           title="Pet Dashboard"
           description="Manage your pets"
         />
-        <Button
-          className="w-12 h-12 rounded-xl"
-          onClick={() => {
-            router.push("/pets/new");
-          }}
-        >
-          <Plus />
-        </Button>
+
+        <TooltipWrapper
+          item={
+            <Button
+              className="w-12 h-12 rounded-xl"
+              onClick={() => {
+                router.push("/pets/new");
+              }}
+            >
+              <Plus />
+            </Button>
+          }
+          tooltipContent="Add a new pet"
+        />
       </div>
 
       <div className="flex items-center justify-center">

@@ -30,34 +30,32 @@ export function PetCarousel({ pets }: PetsDashboardProps) {
         {pets.map((pet) => (
           <CarouselItem
             key={pet.id}
-            className="md:basis-1/2 lg:basis-1/3"
+            className="md:basis-1/2 lg:basis-1/3 hover:scale-105 transition-all cursor-pointer"
           >
             <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">
-                    <Image
-                      src={pet.images[0].imageUrl}
-                      width={400}
-                      height={400}
-                      alt={pet.name}
-                      className="aspect-square object-cover rounded-md"
-                    />
-                    <div className="flex justify-between pt-4">
-                      <div>
-                        <h1 className="text-2xl">{pet.name}</h1>
-                        <p className="text-sm">{pet.description}</p>
-                      </div>
-                      <Button
-                        variant={"outline"}
-                        onClick={() => router.push(`/pets/${pet.id}`)}
-                      >
-                        Edit
-                      </Button>
+              <div className="flex aspect-square items-center justify-center p-6">
+                <span className="text-4xl font-semibold">
+                  <Image
+                    src={pet.images[0].imageUrl}
+                    width={400}
+                    height={400}
+                    alt={pet.name}
+                    className="aspect-square object-cover rounded-md"
+                  />
+                  <div className="flex justify-between pt-4">
+                    <div>
+                      <h1 className="text-2xl">{pet.name}</h1>
+                      <p className="text-sm">{pet.description}</p>
                     </div>
-                  </span>
-                </CardContent>
-              </Card>
+                    <Button
+                      variant={"outline"}
+                      onClick={() => router.push(`/pets/${pet.id}`)}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+                </span>
+              </div>
             </div>
           </CarouselItem>
         ))}
