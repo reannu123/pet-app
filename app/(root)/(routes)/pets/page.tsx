@@ -4,6 +4,7 @@ import { redirect, useRouter } from "next/navigation";
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import PetsDashboard from "./components/pets-dashboard";
+import Container from "@/components/ui/container";
 
 export default async function Pets() {
   const { userId } = auth();
@@ -35,8 +36,10 @@ export default async function Pets() {
     }) || [];
 
   return (
-    <div className="flex flex-col items-center gap-10 py-8">
-      <PetsDashboard pets={pets} />
+    <div className="py-8">
+      <Container>
+        <PetsDashboard pets={pets} />
+      </Container>
     </div>
   );
 }

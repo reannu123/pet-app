@@ -14,6 +14,7 @@ import { Image as ImageType, Pet as PetType } from "@prisma/client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Edit } from "lucide-react";
 
 interface PetsDashboardProps {
   pets: Pet[];
@@ -48,10 +49,10 @@ export function PetCarousel({ pets }: PetsDashboardProps) {
                       <p className="text-sm">{pet.description}</p>
                     </div>
                     <Button
-                      variant={"outline"}
+                      variant={"ghost"}
                       onClick={() => router.push(`/pets/${pet.id}`)}
                     >
-                      Edit
+                      <Edit />
                     </Button>
                   </div>
                 </span>

@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 import axios from "axios";
 import { AlertModal } from "@/components/alert-modal";
-import { CalendarIcon, Trash } from "lucide-react";
+import { CalendarIcon, Save, Trash } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -30,6 +30,7 @@ import {
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { TooltipWrapper } from "@/components/tooltips/tooltip-wrapper";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -106,7 +107,7 @@ export default function PetForm({ initialData }: PetFormProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 md:space-y-10">
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -119,23 +120,28 @@ export default function PetForm({ initialData }: PetFormProps) {
           description={description}
         />
         {initialData && (
-          <Button
-            disabled={loading}
-            variant="destructive"
-            size="sm"
-            onClick={() => {
-              setOpen(true);
-            }}
-          >
-            <Trash className="h-4 w-4" />
-          </Button>
+          <TooltipWrapper
+            item={
+              <Button
+                disabled={loading}
+                variant="destructive"
+                size="sm"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              >
+                <Trash className="h-4 w-4" />
+              </Button>
+            }
+            tooltipContent="Delete pet"
+          />
         )}
       </div>
 
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="grid space-y-8 md:grid-cols-2 md:space-x-8"
         >
           <FormField
             control={form.control}
@@ -163,51 +169,7 @@ export default function PetForm({ initialData }: PetFormProps) {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="birthday"
-            render={({ field }) => (
-              <FormItem className="flex flex-col">
-                <FormLabel>Birthday</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-auto p-0"
-                    align="start"
-                  >
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-8 max-w-md">
             <FormField
               control={form.control}
               name="name"
@@ -242,13 +204,62 @@ export default function PetForm({ initialData }: PetFormProps) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="birthday"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Birthday</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      className="w-auto p-0"
+                      align="start"
+                    >
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <TooltipWrapper
+              item={
+                <Button
+                  type="submit"
+                  disabled={loading}
+                >
+                  <Save />
+                </Button>
+              }
+              tooltipContent="Save changes"
+            />
           </div>
-          <Button
-            type="submit"
-            disabled={loading}
-          >
-            {action}
-          </Button>
         </form>
       </Form>
     </div>

@@ -10,18 +10,16 @@ import NavActions from "./nav-actions";
 export const revalidate = 0;
 const Navbar = async () => {
   return (
-    <div className="bg-white border-b">
-      <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-          <Link
-            href="/"
-            className="ml-0 flex lg:ml-0 gap-x-2"
-          >
-            <p className="font-bold text-xl">PET MANAGER</p>
-          </Link>
-          <NavActions />
-        </div>
-      </Container>
+    <div className="bg-white border-b ">
+      <div className="relative flex h-16 items-center mx-auto w-10/12 max-w-7xl">
+        <Link
+          href="/"
+          className="ml-0 flex lg:ml-0 gap-x-2"
+        >
+          <p className="font-bold text-xl">PET MANAGER</p>
+        </Link>
+        <NavActions />
+      </div>
     </div>
   );
 };

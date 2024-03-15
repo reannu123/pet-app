@@ -35,7 +35,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div>
-      <Carousel className="w-full max-w-3xl mb-4">
+      <Carousel className="w-full max-w-md mb-4">
         <CarouselContent>
           {value.map((url) => (
             <CarouselItem key={url}>

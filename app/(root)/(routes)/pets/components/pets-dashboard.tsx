@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipWrapper } from "@/components/tooltips/tooltip-wrapper";
+import Container from "@/components/ui/container";
 interface PetsDashboardProps {
   pets: Pet[];
 }
@@ -21,7 +22,7 @@ type Pet = PetType & {
 export default function PetsDashboard({ pets }: PetsDashboardProps) {
   const router = useRouter();
   return (
-    <div className="w-5/6 space-y-10">
+    <div className="space-y-10">
       <div className="flex items-center justify-between">
         <Heading
           title="Pet Dashboard"

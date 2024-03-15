@@ -1,5 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import PetForm from "./components/pet-form";
+import Container from "@/components/ui/container";
 
 export default async function PetPage({ params }: { params: { petId: any } }) {
   let pet = null;
@@ -17,8 +18,10 @@ export default async function PetPage({ params }: { params: { petId: any } }) {
 
   return (
     <>
-      <div className="flex items-center justify-center p-8 pt-10">
-        <PetForm initialData={pet} />
+      <div className="py-8">
+        <Container>
+          <PetForm initialData={pet} />
+        </Container>
       </div>
     </>
   );
