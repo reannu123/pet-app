@@ -10,7 +10,7 @@ export async function PATCH(
     const { userId } = auth();
     const body = await req.json();
 
-    const { name, description, images } = body;
+    const { name, description, images, birthday } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
@@ -67,6 +67,7 @@ export async function PATCH(
       data: {
         name,
         description,
+        birthday,
         images: {
           deleteMany: {},
         },
@@ -87,6 +88,7 @@ export async function PATCH(
       data: {
         name,
         description,
+        birthday,
         images: {
           createMany: {
             data: images.map((image: { url: string }) => image),
