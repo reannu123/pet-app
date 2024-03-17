@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CD
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build the Docker image
+    - name: Build and Push the Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
