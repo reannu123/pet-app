@@ -8,7 +8,7 @@ import { SheetTrigger } from "../ui/sheet";
 const NavActions = () => {
   const Auth = auth();
   return (
-    <div className="flex space-x-4">
+    <div className="ml-auto flex space-x-4">
       <div className="ml-auto flex items-center space-x-4">
         {Auth.userId ? <UserButton afterSignOutUrl="/" /> : <UserNav />}
       </div>

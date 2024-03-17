@@ -20,23 +20,42 @@ model User {
   userId    String   @unique
   imageUrl  String
   pets      UserPet[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Pet {
   id        Int      @id @default(autoincrement())
   name      String
-  age       Int
-  ownerId   Int
+  birthday  DateTime?
   owner     UserPet[]
+  images    Image[]
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Image{
+  id        Int      @id @default(autoincrement())
+  imageUrl       String
+  petId     Int
+  pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([petId])
 }
 
 model UserPet {
   id       Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  pet       Pet      @relation(fields: [petId], references: [id])
+  pet       Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
   petId     Int
-  role      String
+  role     String
+  roleId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([petId])
